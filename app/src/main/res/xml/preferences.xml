@@ -30,7 +30,7 @@
                 android:title="@string/preferences_chats__chats"
                 android:icon="@drawable/ic_photo_24"/>
     
-    <Preference android:key="preference_category_chats"
+    <Preference android:key="preference_category_folders"
                 android:title="@string/preferences__folders"
                 android:icon="@drawable/ic_folder_grey_24"/>
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:key="backup_category" android:title="@string/preferences_folders__folder_reccomendation">
+        <androidx.preference.Preference
+            android:key="pref_backup"
+            android:persistent="false"
+            android:title="@string/preferences_folders__unread"
+            android:summary="Unread messages from all chat rooms"
+            android:icon="@drawable/ic_baseline_add_circle_blue_24"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:layout="@layout/preference_divider"/>
+
+    <PreferenceCategory android:key="backup_category" android:title="@string/preferences_folders__add_folder">
+        <androidx.preference.Preference
+            android:key="pref_backup"
+            android:persistent="false"
+            android:title="@string/preferences_folders__create_new_folder"
+            android:icon="@drawable/ic_baseline_add_circle_outline_24"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

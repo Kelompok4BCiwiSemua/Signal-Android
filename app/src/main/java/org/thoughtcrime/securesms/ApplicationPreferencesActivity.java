@@ -39,6 +39,7 @@ import org.thoughtcrime.securesms.preferences.AppProtectionPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.AppearancePreferenceFragment;
 import org.thoughtcrime.securesms.preferences.BackupsPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.ChatsPreferenceFragment;
+import org.thoughtcrime.securesms.preferences.FoldersPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.CorrectedPreferenceFragment;
 import org.thoughtcrime.securesms.preferences.DataAndStoragePreferenceFragment;
 import org.thoughtcrime.securesms.preferences.EditProxyFragment;
@@ -82,6 +83,7 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActivity
   private static final String PREFERENCE_CATEGORY_APP_PROTECTION = "preference_category_app_protection";
   private static final String PREFERENCE_CATEGORY_APPEARANCE     = "preference_category_appearance";
   private static final String PREFERENCE_CATEGORY_CHATS          = "preference_category_chats";
+  private static final String PREFERENCE_CATEGORY_FOLDERS        = "preference_category_folders";
   private static final String PREFERENCE_CATEGORY_STORAGE        = "preference_category_storage";
   private static final String PREFERENCE_CATEGORY_DEVICES        = "preference_category_devices";
   private static final String PREFERENCE_CATEGORY_HELP           = "preference_category_help";
@@ -209,6 +211,8 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActivity
         .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_APPEARANCE));
       this.findPreference(PREFERENCE_CATEGORY_CHATS)
         .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_CHATS));
+      this.findPreference(PREFERENCE_CATEGORY_FOLDERS)
+        .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_FOLDERS));
       this.findPreference(PREFERENCE_CATEGORY_STORAGE)
         .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_STORAGE));
       this.findPreference(PREFERENCE_CATEGORY_DEVICES)
@@ -280,6 +284,8 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActivity
           .setSummary(AppearancePreferenceFragment.getSummary(getActivity()));
       this.findPreference(PREFERENCE_CATEGORY_CHATS)
           .setSummary(ChatsPreferenceFragment.getSummary(getActivity()));
+      this.findPreference(PREFERENCE_CATEGORY_FOLDERS)
+          .setSummary(FoldersPreferenceFragment.getSummary(getActivity()));
     }
 
     private void setCategoryVisibility() {
@@ -319,6 +325,9 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActivity
           break;
         case PREFERENCE_CATEGORY_CHATS:
           fragment = new ChatsPreferenceFragment();
+          break;
+        case PREFERENCE_CATEGORY_FOLDERS:
+          fragment = new FoldersPreferenceFragment();
           break;
         case PREFERENCE_CATEGORY_STORAGE:
           fragment = new DataAndStoragePreferenceFragment();
