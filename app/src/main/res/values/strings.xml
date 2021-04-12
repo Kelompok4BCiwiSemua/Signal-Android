@@ -2332,6 +2332,8 @@
     <string name="preferences_app_protection__app_access">App access</string>
     <string name="preferences_app_protection__communication">Communication</string>
     <string name="preferences_chats__chats">Chats</string>
+    <string name="preferences__folders">Folders</string>
+    <string name="preferences__include_chat">Include Chat</string>
     <string name="preferences_data_and_storage__manage_storage">Manage storage</string>
     <string name="preferences_data_and_storage__calls">Calls</string>
     <string name="preferences_data_and_storage__use_less_data_for_calls">Use less data for calls</string>
@@ -3237,6 +3239,7 @@
     <string name="WallpaperCropActivity__error_setting_wallpaper">Error setting wallpaper.</string>
     <string name="WallpaperCropActivity__blur_photo">Blur photo</string>
 
+<<<<<<< Updated upstream
     <!-- InfoCard -->
     <string name="payment_info_card_about_mobilecoin">About MobileCoin</string>
     <string name="payment_info_card_mobilecoin_is_a_new_privacy_focused_digital_currency">MobileCoin is a new privacy focused digital currency.</string>
@@ -3334,6 +3337,10 @@
     <string name="CanNotSendPaymentDialog__to_send_a_payment_to_this_user">To send a payment to this user they need to accept a message request from you. Send them a message to create a message request.</string>
     <string name="CanNotSendPaymentDialog__send_a_message">Send a message</string>
 
+=======
+    <!---automatically folders-->
+    <string name="folder_autoread">Unread</string>
+>>>>>>> Stashed changes
     <!-- EOF -->
 
 </resources>

@@ -41,9 +41,10 @@
         android:textAppearance="@style/Signal.Text.Body"
         app:layout_constraintBottom_toBottomOf="@+id/recipient_avatar"
         app:layout_constraintEnd_toStartOf="@+id/request_deny"
-        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/recipient_avatar"
         app:layout_constraintTop_toTopOf="@+id/recipient_avatar"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="@tools:sample/full_names" />
 
     <ImageButton
@@ -56,6 +57,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/recipient_avatar"
         app:layout_constraintEnd_toStartOf="@+id/popupMenuProgressContainer"
         app:layout_constraintTop_toTopOf="@+id/recipient_avatar"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_check_28_tinted" />
 
     <ImageButton

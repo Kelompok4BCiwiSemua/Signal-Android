@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <PreferenceCategory android:title="@string/preferences_created_automatically">
+        <PreferenceCategory android:layout="@layout/auto_folder" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:layout="@layout/preference_divider" />
+
+    <PreferenceCategory android:title="@string/preferences_chats__chats">
+        <PreferenceCategory android:layout="@layout/chats" />
+    </PreferenceCategory>
+</PreferenceScreen>
