@@ -33,17 +33,7 @@
             android:paddingStart="28dp"
             android:paddingEnd="28dp">
 
-            <TextView android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.Signal.Title2.Bold"
-                android:text="@string/InviteActivity_friends_dont_let_friends_text_unencrypted"
-                android:textColor="@color/signal_text_primary"
-                android:gravity="center_horizontal"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="18dp"
-                android:paddingStart="10dp"/>
-
-            <EditText android:id="@+id/invite_text"
+            <EditText android:id="@+id/note_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minLines="2"
@@ -59,7 +49,7 @@
                 android:gravity="top"
                 android:inputType="textShortMessage|textMultiLine"/>
 
-            <Button android:id="@+id/sms_button"
+            <Button android:id="@+id/save_button"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/InviteActivity_share_with_contacts"
                 android:layout_marginTop="16dp"
@@ -69,7 +59,7 @@
                 android:layout_height="wrap_content" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/share_button"
+                android:id="@+id/note_button"
                 style="@style/Button.Borderless"
                 app:drawableStartCompat="@drawable/ic_share_24"
                 android:drawablePadding="4dp"
@@ -78,6 +68,26 @@
                 android:layout_width="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/note1"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:background="@drawable/invite_edit_text_background"
+                android:gravity="top"
+                android:inputType="textShortMessage|textMultiLine"
+                android:minHeight="@dimen/invite_edit_text_min_height"
+                android:minLines="2"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/signal_text_primary"
+                tools:text="Let's switch to Signal: https://sgnl.link/asdfdfsa" />
+
+
+
 
         </LinearLayout>
     </ScrollView>

@@ -13,6 +13,9 @@
     <item android:title="@string/text_secure_normal__invite_friends"
           android:id="@+id/menu_invite" />
 
+    <item android:title="@string/catatan_pribadi"
+        android:id="@+id/menu_notes" />
+
     <item android:title="@string/text_secure_normal__menu_settings"
           android:id="@+id/menu_settings" />
 

@@ -90,6 +90,11 @@ public class MainNavigator {
     activity.startActivity(intent);
   }
 
+  public void goToNote() {
+    Intent intent = new Intent(activity, InviteActivity.class);
+    activity.startActivity(intent);
+  }
+
   public void goToInsights() {
     InsightsLauncher.showInsightsDashboard(activity.getSupportFragmentManager());
   }

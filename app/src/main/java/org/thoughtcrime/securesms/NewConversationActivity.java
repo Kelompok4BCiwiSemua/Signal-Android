@@ -117,6 +117,7 @@ public class NewConversationActivity extends ContactSelectionActivity
     case R.id.menu_refresh:   handleManualRefresh(); return true;
     case R.id.menu_new_group: handleCreateGroup();   return true;
     case R.id.menu_invite:    handleInvite();        return true;
+    case R.id.menu_notes:     handleNote();        return true;
     }
 
     return false;
@@ -135,6 +136,10 @@ public class NewConversationActivity extends ContactSelectionActivity
     startActivity(new Intent(this, InviteActivity.class));
   }
 
+  private void handleNote() {
+    startActivity(new Intent(this, InviteActivity.class));
+  }
+
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     menu.clear();
@@ -147,6 +152,11 @@ public class NewConversationActivity extends ContactSelectionActivity
   @Override
   public void onInvite() {
     handleInvite();
+    finish();
+  }
+
+  public void onNote() {
+    handleNote();
     finish();
   }
 

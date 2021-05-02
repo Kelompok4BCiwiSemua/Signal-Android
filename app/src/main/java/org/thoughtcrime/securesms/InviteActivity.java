@@ -16,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.AnimRes;
@@ -46,18 +47,26 @@ import org.thoughtcrime.securesms.util.text.AfterTextChanged;
 import org.whispersystems.libsignal.util.guava.Optional;
 
 import java.util.concurrent.ExecutionException;
+import java.util.LinkedList;
+import java.util.Iterator;
 
 public class InviteActivity extends PassphraseRequiredActivity implements ContactSelectionListFragment.OnContactSelectedListener {
 
   private ContactSelectionListFragment contactsFragment;
-  private EditText                     inviteText;
+  private EditText                     noteText;
+  private static TextView              note1;
   private ViewGroup                    smsSendFrame;
   private Button                       smsSendButton;
   private Animation                    slideInAnimation;
   private Animation                    slideOutAnimation;
   private DynamicTheme                 dynamicTheme = new DynamicNoActionBarInviteTheme();
   private Toolbar                      primaryToolbar;
-
+  private String                       note;
+  private String                       notes;
+  private String                       noted;
+  private int                          j;
+  private boolean                      add = false;
+  LinkedList<String> s = new LinkedList<>();
   @Override
   protected void onPreCreate() {
     super.onPreCreate();
@@ -71,7 +80,7 @@ public class InviteActivity extends PassphraseRequiredActivity implements Contac
     getIntent().putExtra(ContactSelectionListFragment.HIDE_COUNT, true);
     getIntent().putExtra(ContactSelectionListFragment.REFRESHABLE, false);
 
-    setContentView(R.layout.invite_activity);
+    setContentView(R.layout.add_notes);
 
     initializeAppBar();
     initializeResources();
@@ -90,31 +99,29 @@ public class InviteActivity extends PassphraseRequiredActivity implements Contac
     assert getSupportActionBar() != null;
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    getSupportActionBar().setTitle(R.string.AndroidManifest__invite_friends);
+    getSupportActionBar().setTitle(R.string.NoteActivity_note);
   }
 
   private void initializeResources() {
     slideInAnimation  = loadAnimation(R.anim.slide_from_bottom);
     slideOutAnimation = loadAnimation(R.anim.slide_to_bottom);
 
-    View                 shareButton     = findViewById(R.id.share_button);
-    Button               smsButton       = findViewById(R.id.sms_button);
+    View                 noteButton     = findViewById(R.id.note_button);
+    Button               saveButton       = findViewById(R.id.save_button);
     Button               smsCancelButton = findViewById(R.id.cancel_sms_button);
     ContactFilterToolbar contactFilter   = findViewById(R.id.contact_filter);
 
-    inviteText        = findViewById(R.id.invite_text);
+    noteText        = findViewById(R.id.note_text);
+    note1             = findViewById(R.id.note1);
     smsSendFrame      = findViewById(R.id.sms_send_frame);
     smsSendButton     = findViewById(R.id.send_sms_button);
     contactsFragment  = (ContactSelectionListFragment)getSupportFragmentManager().findFragmentById(R.id.contact_selection_list_fragment);
-
-    inviteText.setText(getString(R.string.InviteActivity_lets_switch_to_signal, getString(R.string.install_url)));
-    inviteText.addTextChangedListener(new AfterTextChanged(editable -> {
+    noteText.setText(note);
+    noteText.addTextChangedListener(new AfterTextChanged(editable -> {
       boolean isEnabled = editable.length() > 0;
-      smsButton.setEnabled(isEnabled);
-      shareButton.setEnabled(isEnabled);
-      smsButton.animate().alpha(isEnabled ? 1f : 0.5f);
-      shareButton.animate().alpha(isEnabled ? 1f : 0.5f);
-    }));
+      saveButton.setEnabled(isEnabled);
+      saveButton.animate().alpha(isEnabled ? 1f : 0.5f);
+       }));
 
     updateSmsButtonText(contactsFragment.getSelectedContacts().size());
 
@@ -124,12 +131,13 @@ public class InviteActivity extends PassphraseRequiredActivity implements Contac
     contactFilter.setNavigationIcon(R.drawable.ic_search_conversation_24);
 
     if (Util.isDefaultSmsProvider(this)) {
-      shareButton.setOnClickListener(new ShareClickListener());
-      smsButton.setOnClickListener(new SmsClickListener());
+      noteButton.setOnClickListener(new ShareClickListener());
+      saveButton.setOnClickListener(new SmsClickListener());
     } else {
-      shareButton.setVisibility(View.GONE);
-      smsButton.setOnClickListener(new ShareClickListener());
-      smsButton.setText(R.string.InviteActivity_share);
+      noteButton.setVisibility(View.GONE);
+      saveButton.setOnClickListener(new ShareClickListener());
+      saveButton.setOnClickListener(new SmsClickListener());
+      saveButton.setText(R.string.NoteActivity_simpan);
     }
   }
 
@@ -151,16 +159,16 @@ public class InviteActivity extends PassphraseRequiredActivity implements Contac
   }
 
   private void sendSmsInvites() {
-    new SendSmsInvitesAsyncTask(this, inviteText.getText().toString())
-        .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-                           contactsFragment.getSelectedContacts()
-                                           .toArray(new SelectedContact[0]));
+    new SendSmsInvitesAsyncTask(this, noteText.getText().toString())
+            .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
+                    contactsFragment.getSelectedContacts()
+                            .toArray(new SelectedContact[0]));
   }
 
   private void updateSmsButtonText(int count) {
     smsSendButton.setText(getResources().getQuantityString(R.plurals.InviteActivity_send_sms_to_friends,
-                                                           count,
-                                                           count));
+            count,
+            count));
     smsSendButton.setEnabled(count > 0);
   }
 
@@ -212,25 +220,22 @@ public class InviteActivity extends PassphraseRequiredActivity implements Contac
   private class ShareClickListener implements OnClickListener {
     @Override
     public void onClick(View v) {
-      Intent sendIntent = new Intent();
-      sendIntent.setAction(Intent.ACTION_SEND);
-      sendIntent.putExtra(Intent.EXTRA_TEXT, inviteText.getText().toString());
-      sendIntent.setType("text/plain");
-      if (sendIntent.resolveActivity(getPackageManager()) != null) {
-        startActivity(Intent.createChooser(sendIntent, getString(R.string.InviteActivity_invite_to_signal)));
-      } else {
-        Toast.makeText(InviteActivity.this, R.string.InviteActivity_no_app_to_share_to, Toast.LENGTH_LONG).show();
-      }
+      noteText.setText(noteText.getText().toString());
     }
   }
 
   private class SmsClickListener implements OnClickListener {
+
     @Override
     public void onClick(View v) {
-      setPrimaryColorsToolbarForSms();
-      ViewUtil.animateIn(smsSendFrame, slideInAnimation);
+      note = noteText.getText().toString();
+      s.push("\n" + note);
+      j = s.size();
+      int k = 0;
+      note1.append(note+"\n");
     }
-  }
+    }
+
 
   private class SmsCancelClickListener implements OnClickListener {
     @Override
@@ -243,13 +248,13 @@ public class InviteActivity extends PassphraseRequiredActivity implements Contac
     @Override
     public void onClick(View v) {
       new AlertDialog.Builder(InviteActivity.this)
-          .setTitle(getResources().getQuantityString(R.plurals.InviteActivity_send_sms_invites,
-                                                     contactsFragment.getSelectedContacts().size(),
-                                                     contactsFragment.getSelectedContacts().size()))
-          .setMessage(inviteText.getText().toString())
-          .setPositiveButton(R.string.yes, (dialog, which) -> sendSmsInvites())
-          .setNegativeButton(R.string.no, (dialog, which) -> dialog.dismiss())
-          .show();
+              .setTitle(getResources().getQuantityString(R.plurals.InviteActivity_send_sms_invites,
+                      contactsFragment.getSelectedContacts().size(),
+                      contactsFragment.getSelectedContacts().size()))
+              .setMessage(noteText.getText().toString())
+              .setPositiveButton(R.string.yes, (dialog, which) -> sendSmsInvites())
+              .setNegativeButton(R.string.no, (dialog, which) -> dialog.dismiss())
+              .show();
     }
   }
 

@@ -879,6 +879,10 @@
 
     <!-- InviteActivity -->
     <string name="InviteActivity_share">Share</string>
+    <string name="NoteActivity_simpan">TAMBAHKAN</string>
+    <string name="NoteActivity_tambah_note">Tulis Disini</string>
+    <string name="NoteActivity_note">Catatan Pribadi</string>
+    <string name="NoteActivity_note_desk"></string>
     <string name="InviteActivity_share_with_contacts">Share with contacts</string>
     <string name="InviteActivity_choose_how_to_share">Choose how to share</string>
 
@@ -3239,7 +3243,7 @@
     <string name="WallpaperCropActivity__error_setting_wallpaper">Error setting wallpaper.</string>
     <string name="WallpaperCropActivity__blur_photo">Blur photo</string>
 
-<<<<<<< Updated upstream
+
     <!-- InfoCard -->
     <string name="payment_info_card_about_mobilecoin">About MobileCoin</string>
     <string name="payment_info_card_mobilecoin_is_a_new_privacy_focused_digital_currency">MobileCoin is a new privacy focused digital currency.</string>
@@ -3340,7 +3344,9 @@
 =======
     <!---automatically folders-->
     <string name="folder_autoread">Unread</string>
->>>>>>> Stashed changes
+    <string name="notes">Notes</string>
+    <string name="catatan_pribadi">Catatan Pribadi</string>
+    >>>>>>> Stashed changes
     <!-- EOF -->
 
 </resources>

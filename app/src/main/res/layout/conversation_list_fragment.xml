@@ -187,6 +187,8 @@
       android:scrollbars="vertical"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintTop_toBottomOf="@id/banner_barrier"
+      app:layout_constraintVertical_bias="1.0"
+      tools:layout_editor_absoluteX="0dp"
       tools:listitem="@layout/conversation_list_item_view"
       tools:visibility="visible" />
 
